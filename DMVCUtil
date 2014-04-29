@@ -1,0 +1,7 @@
+#include "util/QXmlHelper.h"
+#include "util/QXmlRpcCall.h"
+#include "util/QXmlRpcClient.h"
+#include "util/QXmlRpcFault.h"
+#include "util/QXmlRpcObject.h"
+#include "util/QXmlRpcServer.h"
+#include "util/QXmlRpcServerConnection.h"
