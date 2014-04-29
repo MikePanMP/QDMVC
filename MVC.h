@@ -83,8 +83,8 @@ private:
 	QList<MVCView*> dependents;
 };
 /*
-* MVCController
-	 */
+ * MVCController
+ */
 class MVCController : public QObject {
 	Q_OBJECT
 public:
