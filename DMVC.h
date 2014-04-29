@@ -12,10 +12,10 @@
 #include <QtWidgets/QMainwindow>
 #include <QtWidgets/QWidget>
 
-#include "../../QDMVC/MVC.h"
-#include "../../QDMVC/MVCMacro.h"
+#include "MVC.h"
+#include "MVCMacro.h"
 
-#include "../../QDMVC/DMVCUtil"
+#include "DMVCUtil"
 
 namespace DMVC {
 	QString LoadHostName(const QString& filename);
