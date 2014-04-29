@@ -120,9 +120,7 @@ private:
 class MVCView : public QGraphicsObject {
 	Q_OBJECT
 public:// Methods for override
-	virtual void selfUpdate() {
-		return;
-	}
+	virtual void selfUpdate();
 	virtual MVCController* defaultController();
 public:// Methods for functional use
 	void init(bool focus = true);// called in subclass's constructor

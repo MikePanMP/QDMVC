@@ -132,6 +132,10 @@ void MVCController::listenToView() {
 		);
 }
 
+void MVCView::selfUpdate() {
+	return;
+}
+
 void MVCView::init(bool focus) {
 	connect(this, SIGNAL(update()), this, SLOT(invalidate()));
 
@@ -231,6 +235,7 @@ QRectF MVCView::boundingRect() const {
 
 	return thisRect;
 }
+
 void MVCView::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget){
 	QRectF rect = boundingRect();
 	//painter->fillRect(rect, QColor(0,0,0,0));
