@@ -183,6 +183,16 @@ MVCView::MVCView(
 MVCView::~MVCView() {
 }
 
+MVCModel* MVCView::getModel() {
+	return model;
+}
+MVCView* MVCView::getMVCParent() {
+	return parent;
+}
+MVCController* MVCView::getController() {
+	return controller;
+}
+
 void MVCView::initWidget() {
 	//mike("MVCView::initWidget");
 	switch (viewType) {
@@ -208,6 +218,28 @@ void MVCView::keyPressEvent(QKeyEvent* e) {
 void MVCView::keyReleaseEvent(QKeyEvent* e) {
 	if (!e->isAutoRepeat())
 		emit eventCaptured(MVCMacro::EVENT_KEY_RELEASE, e);
+}
+
+QRectF MVCView::boundingRect() const {
+	QRectF thisRect(0, 0, 200, 200);
+	if (viewType == MVCMacro::VIEW_TYPE_PIXMAP) {
+		if (!component)
+			return thisRect;
+		else
+			return component->boundingRect();
+	}
+
+	return thisRect;
+}
+void MVCView::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget){
+	QRectF rect = boundingRect();
+	//painter->fillRect(rect, QColor(0,0,0,0));
+	painter->fillRect(rect, QColor(Qt::transparent));
+}
+
+void MVCView::invalidate() {
+	selfUpdate();
+	prepareGeometryChange();
 }
 
 QRectF MVCPixmap::boundingRect() const{

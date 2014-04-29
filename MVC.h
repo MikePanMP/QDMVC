@@ -29,9 +29,9 @@ class MVCController;
 
 class MVCPixmap;
 /*
-* MVCApp
-	 */
- class MVCApp {
+ * MVCApp
+ */
+class MVCApp {
 public:
 	MVCApp(int argc, char *argv[]) : a(argc, argv), flag(false) {
 		view = new QGraphicsView(&scene);
@@ -67,9 +67,9 @@ private:
 	bool flag;
 };
 /*
-* MVCModel
-	 */
- class MVCModel : public QObject {
+ * MVCModel
+ */
+class MVCModel : public QObject {
 	Q_OBJECT
 public:
 	bool addDependent(MVCView* view);
@@ -85,7 +85,7 @@ private:
 /*
 * MVCController
 	 */
- class MVCController : public QObject {
+class MVCController : public QObject {
 	Q_OBJECT
 public:
 	MVCController(MVCView* _view);
@@ -104,7 +104,7 @@ public:
 	virtual void yellowButtonDoubleClickEvent();
 	virtual void keyPressEvent(char key);
 	virtual void keyReleaseEvent(char key);
-	public slots: // Methods for slots
+public slots: // Methods for slots
 	void eventCaptured(MVCMacro::EventId eid, QGraphicsSceneMouseEvent* e);
 	void eventCaptured(MVCMacro::EventId eid, QKeyEvent* e);
 signals:// Methods for signals
@@ -115,8 +115,8 @@ private:
 	MVCView* view;
 };
 /*
-* MVCView
-	 */
+ * MVCView
+ */
 class MVCView : public QGraphicsObject {
 	Q_OBJECT
 public:// Methods for override
@@ -133,43 +133,21 @@ public:// Mechods of basics
 		MVCMacro::ViewType _viewType = MVCMacro::VIEW_TYPE_PIXMAP, 
 		MVCView* _parent = 0);
 	virtual ~MVCView();
-	MVCModel* getModel() {
-		return model;
-	}
-	MVCView* getMVCParent() {
-		return parent;
-	}
-	MVCController* getController() {
-		return controller;
-	}
+public:
+	MVCModel* getModel();
+	MVCView* getMVCParent();
+	MVCController* getController();
 protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* e);
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* e);
 	virtual void keyPressEvent(QKeyEvent* e);
 	virtual void keyReleaseEvent(QKeyEvent* e);
 public:
-	virtual QRectF boundingRect() const {
-		QRectF thisRect(0, 0, 200, 200);
-		if (viewType == MVCMacro::VIEW_TYPE_PIXMAP) {
-			if (!component)
-				return thisRect;
-			else
-				return component->boundingRect();
-		}
-
-		return thisRect;
-	}
+	virtual QRectF boundingRect() const;
 protected:
-	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget){
-		QRectF rect = boundingRect();
-		//painter->fillRect(rect, QColor(0,0,0,0));
-		painter->fillRect(rect, QColor(Qt::transparent));
-	}
-	public slots:// Methods for slots
-	void invalidate() {
-		selfUpdate();
-		prepareGeometryChange();
-	}
+	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+public slots:// Methods for slots
+	void invalidate();
 signals://Methods for signals
 	void update();
 	void eventCaptured(MVCMacro::EventId, QGraphicsSceneMouseEvent*);
@@ -184,9 +162,9 @@ private:
 	MVCView* parent;
 };
 /*
-* MVCPixmap
-	 */
- class MVCPixmap : public QGraphicsObject {
+ * MVCPixmap
+ */
+class MVCPixmap : public QGraphicsObject {
 	Q_OBJECT
 public:
 	virtual QRectF boundingRect() const;
